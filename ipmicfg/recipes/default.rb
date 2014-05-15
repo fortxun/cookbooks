@@ -2,7 +2,7 @@
 # Cookbook Name:: ipmicfg
 # Recipe:: default
 #
-# Copyright 2014, PSCE
+# Copyright 2014, fortxun
 #
 # All rights reserved - Do Not Redistribute
 #
