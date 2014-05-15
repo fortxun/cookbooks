@@ -1,6 +1,6 @@
 name             'ipmicfg'
-maintainer       'YOUR_COMPANY_NAME'
-maintainer_email 'YOUR_EMAIL'
+maintainer       'fortxun'
+maintainer_email 'ewen.fortune@gmail.com'
 license          'All rights reserved'
 description      'Installs/Configures ipmicfg'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
