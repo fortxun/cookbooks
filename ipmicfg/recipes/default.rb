@@ -27,3 +27,10 @@ rm -rf "/tmp/ipmicfg-#{ipmicfg_version}"
 EOH
   creates "/usr/local/ipmicfg-#{ipmicfg_version}/linux/64bit/ipmicfg-linux.x86_64"
 end
+
+# If the system has installed the OpenIPMI driver, enable the Linux IPMI driver
+execute "ipmi start" do
+  command "/etc/init.d/ipmi start"
+  ignore_failure true
+  not_if do ::File.exists?('/etc/init.d/ipmi') end
+end
