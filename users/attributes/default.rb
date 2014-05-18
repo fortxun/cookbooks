@@ -2,6 +2,6 @@
 # attributes to be applied to nodes that run this cookbook.
 
 # Set a default name
-default[:users][:node_filter] = 'none'
+default[:users][:node_filter] = '*'
 
 # For further information, see the Chef documentation (http://docs.opscode.com/essentials_cookbook_attribute_files.html).
