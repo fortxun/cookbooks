@@ -28,18 +28,24 @@ bash "build ipmicfg-#{ipmicfg_version}" do
 unzip #{Chef::Config[:file_cache_path]}/#{ipmicfg_archive} -d /usr/local
 rm -rf "/tmp/ipmicfg-#{ipmicfg_version}"
 EOH
-  creates "/usr/local/ipmicfg-#{ipmicfg_version}/linux/64bit/ipmicfg-linux.x86_64"
+  creates "/usr/local/ipmicfg_#{ipmicfg_version}"
 end
 
 # Create a symlink to the new binary in PATH
-case kernel[:machine]
+case node['kernel']['machine']
 when "x86_64"
+	file "/usr/local/ipmicfg_#{ipmicfg_version}/linux/64bit/ipmicfg-linux.x86_64" do
+  		mode "544"
+	end
 	link "/usr/local/bin/ipmicfg" do
-  	to "/usr/local/ipmicfg-#{ipmicfg_version}/linux/64bit/ipmicfg-linux.x86_64"
+  	to "/usr/local/ipmicfg_#{ipmicfg_version}/linux/64bit/ipmicfg-linux.x86_64"
 end
 when "i686"
+	file "/usr/local/ipmicfg_#{ipmicfg_version}/linux/32bit/ipmicfg-linux.x86" do
+  		mode "544"
+	end
 	link "/usr/local/bin/ipmicfg" do
-  	to "/usr/local/ipmicfg-#{ipmicfg_version}/linux/32bit/ipmicfg-linux.x86_64"
+  	to "/usr/local/ipmicfg_#{ipmicfg_version}/linux/32bit/ipmicfg-linux.x86"
 end
 else
   Chef::Log.warn("Unknown cpu arch, this recipe currently supports x86_64 and i686.")
