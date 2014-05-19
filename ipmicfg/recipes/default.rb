@@ -31,6 +31,20 @@ EOH
   creates "/usr/local/ipmicfg-#{ipmicfg_version}/linux/64bit/ipmicfg-linux.x86_64"
 end
 
+# Create a symlink to the new binary in PATH
+case kernel[:machine]
+when "x86_64"
+	link "/usr/local/bin/ipmicfg" do
+  	to "/usr/local/ipmicfg-#{ipmicfg_version}/linux/64bit/ipmicfg-linux.x86_64"
+end
+when "i686"
+	link "/usr/local/bin/ipmicfg" do
+  	to "/usr/local/ipmicfg-#{ipmicfg_version}/linux/32bit/ipmicfg-linux.x86_64"
+end
+else
+  Chef::Log.warn("Unknown cpu arch, this recipe currently supports x86_64 and i686.")
+end
+
 #If the system has installed the OpenIPMI driver, enable the Linux IPMI driver
 execute "ipmi start" do
   command "/etc/init.d/ipmi start"
