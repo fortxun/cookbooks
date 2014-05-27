@@ -1,0 +1,83 @@
+mx-connection-limit SOME_DOMAIN 0
+
+<domain SOME_DOMAIN>
+  max-smtp-out 10
+  route SOME_DOMAIN
+</domain>
+
+<domain $important_domain>
+  queue-to "important_domain.queue"
+</domain>
+
+
+
+domain-macro another_important_domain SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,
+             SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,
+             SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN,SOME_DOMAIN
+
+<domain SOME_DOMAIN>
+  max-smtp-out 10
+  route SOME_DOMAIN
+</domain>
+
+<domain $another_important_domain>
+  queue-to "another_important_domain.queue"
+</domain>
+
+
+<domain SOME_DOMAIN>
+   type discard
+</domain>
+<domain SOME_DOMAIN>
+    queue-priority            99
+    smtp-greeting-timeout  5m
+    retry-after  5m
+</domain>
+
+<domain SOME_DOMAIN>
+    max-smtp-out                     20
+    max-msg-per-connection      450
+    max-rcpt-per-message         100
+    smtp-pattern-list                 backoff
+     backoff-to-normal-after 1h  #added in v3.5
+</domain>
+
+<domain SOME_DOMAIN>
+    max-smtp-out                   20
+    max-msg-per-connection    20
+    smtp-greeting-timeout  1m   #  added in v3.2r17
+    mx-connection-attempts 10   # added in v3.2r16
+    smtp-pattern-list               backoff
+    backoff-to-normal-after 1h  #added in v3.5
+    backoff-max-msg-rate  600/h # Use with PowerMTA 3.5
+    backoff-retry-after            30m
+</domain>
+<domain SOME_DOMAIN>
+    max-smtp-out                   20
+    max-msg-per-connection    100
+    smtp-421-means-mx-unavailable yes
+    smtp-pattern-list               backoff
+    backoff-to-normal-after 3h  #added in v3.5
+    backoff-max-msg-rate  600/h # Use with PowerMTA 3.5
+    backoff-retry-after            30m
+</domain>
+<domain SOME_DOMAIN>
+    max-smtp-out                   20
+    max-msg-per-connection    100
+    smtp-pattern-list               backoff
+    backoff-to-normal-after 3h  #added in v3.5
+    backoff-max-msg-rate  600/h # Use with PowerMTA 3.5
+    backoff-retry-after            30m
+</domain>
+<domain SOME_DOMAIN>
+  max-smtp-out 5
+</domain>
+<domain SOME_DOMAIN>
+  max-smtp-out 2
+</domain>
+<domain SOME_DOMAIN>
+    backoff-max-msg-rate                        10000/h
+        max-rcpt-per-message                    100
+        backoff-retry-after             30m
+        #rate-limit-min-granularity              2m
+</domain>
