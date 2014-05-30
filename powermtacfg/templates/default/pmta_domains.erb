@@ -1,0 +1,7 @@
+<% @domains['domains'].each do |domain| %>
+<domain <%= "#{domain[0]}" %>>
+<% domain[1].each_pair do |option, value| %>
+	<%= "#{option} #{value}" %>
+	<% end %>
+</domain>
+<% end %>

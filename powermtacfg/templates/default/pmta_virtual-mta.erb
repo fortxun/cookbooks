@@ -1,0 +1,7 @@
+<% @virtualmtas['hostname'].each do |hostname| %>
+relay-domain <%= "#{hostname}" %>.<%= @local_domain %>
+host-name <%= "#{hostname}" %>.<%= @local_domain %>
+<virtual-mta <%= "#{hostname}" %>>
+  smtp-source-host <%= @ip_address %> <%= "#{hostname}" %>.<%= @local_domain %>
+</virtual-mta>
+<% end %>
