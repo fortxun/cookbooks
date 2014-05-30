@@ -6,6 +6,7 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+
 pmta_virtual_mtas = data_bag_item("pmta", "pmta_virtual-mtas")
 pmta_domains = data_bag_item("pmta", "pmta_domains")
 
